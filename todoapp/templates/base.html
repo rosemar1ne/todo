@@ -9,7 +9,21 @@
 </head>
 <body>
 
-<p>Hi!</p>
+{% if request.user.is_authenticated %}
+
+<h1>Hello, {{ request.user }}</h1>
+
+{% endif %}
+
+<a href="{% url 'create'%}">Create todo +</a>
+
+{% for task in tasks %}
+    <h1>{{task.title}}</h1>
+    <p>{{task.description}}
+        <a href="{% url 'update' pk=task.id %}">update</a>
+        <a href="{% url 'delete' pk=task.id %}">delete</a>
+    </p>
+{% endfor %}
 
 </body>
 </html>
